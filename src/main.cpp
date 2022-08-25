@@ -1,8 +1,5 @@
 
 
-
-
-
 void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 {
 	switch (a_msg->type) {
@@ -53,7 +50,6 @@ namespace
 std::string wstring2string(const std::wstring& wstr, UINT CodePage)
 
 {
-
 	std::string ret;
 
 	int len = WideCharToMultiByte(CodePage, 0, wstr.c_str(), (int)wstr.size(), NULL, 0, NULL, NULL);
@@ -63,9 +59,7 @@ std::string wstring2string(const std::wstring& wstr, UINT CodePage)
 	WideCharToMultiByte(CodePage, 0, wstr.c_str(), (int)wstr.size(), &ret[0], len, NULL, NULL);
 
 	return ret;
-
 }
-
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
@@ -99,10 +93,9 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() {
 	return v;
 }();
 
-
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-    #ifndef NDEBUG
+#ifndef NDEBUG
 	while (!IsDebuggerPresent()) { Sleep(100); }
 #endif
 	REL::Module::reset();  // Clib-NG bug workaround
@@ -116,25 +109,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	if (!messaging->RegisterListener("SKSE", MessageHandler)) {
 		return false;
 	}
-	
-	onSKSEInit();
 
+	onSKSEInit();
 
 	return true;
 }
-
-
-//extern "C" DLLEXPORT void* SKSEAPI RequestPluginAPI(const VAL_API::InterfaceVersion a_interfaceVersion)
-//{
-//	//auto api = Messaging::TrueHUDInterface::GetSingleton();
-//	auto api = ModAPI::VALInterface::GetSingleton();
-//	logger::info("ValhallaCombat::RequestPluginAPI called");
-//
-//	switch (a_interfaceVersion) {
-//	case VAL_API::InterfaceVersion::V1:
-//		logger::info("ValhallaCombat::RequestPluginAPI returned the API singleton");
-//		return static_cast<void*>(api);
-//	}
-//	logger::info("ValhallaCombat::RequestPluginAPI requested the wrong interface version");
-//	return nullptr;
-//}
