@@ -17,7 +17,7 @@ macro(set_from_environment VARIABLE)
 	endif()
 endmacro()
 
-option(COPY_OUTPUT "Copy the output of build operations to the game directory" ON)
+option(COPY_OUTPUT "Copy the output of build operations to the game directory" OFF)
 option(ENABLE_SKYRIM_SE "Enable support for Skyrim SE in the dynamic runtime feature." ON)
 option(ENABLE_SKYRIM_AE "Enable support for Skyrim AE in the dynamic runtime feature." ON)
 option(ENABLE_SKYRIM_VR "Enable support for Skyrim VR in the dynamic runtime feature." OFF)
